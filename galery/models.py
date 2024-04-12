@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 class Photo(models.Model):
 
@@ -14,6 +15,8 @@ class Photo(models.Model):
     description: str = models.TextField(null=False, blank=False)
     photoPath: str = models.CharField(max_length=150, null=False, blank=False)
     category: str = models.CharField(max_length=50, choices=CATEGORIES, default='')
+    date: datetime = models.DateTimeField(default=datetime.now, blank=False)
+    publish: bool = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Photo [name={self.name}]"
