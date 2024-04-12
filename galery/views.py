@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from galery.models import Photo
 
 def index(request):
-    return render(request, 'galery/index.html')
+    photos = Photo.objects.all()
+    return render(request, 'galery/index.html', {"photos": photos})
 
-def image(request):
-    return render(request, 'galery/image.html')
+def image(request, photoId):
+    photo = get_object_or_404(Photo, pk=photoId)
+    return render(request, 'galery/image.html', {"photo": photo})
