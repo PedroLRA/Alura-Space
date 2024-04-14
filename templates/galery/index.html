@@ -1,55 +1,53 @@
 {% extends 'galery/base.html' %}
 {% load static %}
 {% block content %}
-    <div class="pagina-inicial">
-        <main class="principal">
-            {% include 'galery/partials/_side_menu.html' %}
-            <section class="conteudo">
-                <section class="banner">
-                    <img class="banner__imagem" src="{% static '/assets/imagens/Banner(2).png' %}" alt="banner Alura Space">
-                    <h1 class="banner__titulo"> A galeria mais completa de fotos do espaço!</h1>
-                </section>
-                <section class="tags">
-                    <p class="tags__titulo">Busque por tags:</p>
-                    <ul class="tags__lista">
-                        <li class="tags__tag">Nebulosa</li>
-                        <li class="tags__tag">Estrela</li>
-                        <li class="tags__tag">Galáxia</li>
-                        <li class="tags__tag">Planeta</li>
-                    </ul>
-                </section>
-                <section class="galeria">
-                    <div class="cards">
-                        <h2 class="cards__titulo">Navegue pela galeria</h2>
-                        <ul class="cards__lista">
-                            {% if photos %}
-                            {% for photo in photos %}
-                                <li class="card">
-                                    <a href="{% url 'image' photo.id %}">
-                                        {% if photo.photoPath == '' or photo.photoPath == null %}
-                                            <img class="card__imagem" src="{% static '/assets/imagens/galeria/not-found.png'%}" alt="foto">
-                                        {% else %}
-                                            <img class="card__imagem" src="{{ photo.photoPath.url }}" alt="foto">
-                                        {% endif %}
-                                    </a>
-                                    <span class="card__tag">{{ photo.category }}</span>
-                                    <div class="card__info">
-                                        <p class="card__titulo">{{ photo.name }}</p>
-                                        <div class="card__texto">
-                                            <p class="card__descricao">{{ photo.subtitle }}</p>
-                                            <span>
-                                                <img src="{% static '/assets/ícones/1x/favorite_outline.png' %}" alt="ícone de coração">
-                                            </span>
-                                        </div>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                            {% else %}
-                            {% endif %}
-                        </ul>
-                    </div>
-                </section>
+    <main class="principal">
+        {% include 'galery/partials/_side_menu.html' %}
+        <section class="conteudo">
+            <section class="banner">
+                <img class="banner__imagem" src="{% static '/assets/imagens/Banner(2).png' %}" alt="banner Alura Space">
+                <h1 class="banner__titulo"> A galeria mais completa de fotos do espaço!</h1>
             </section>
-        </main>
-    </div>
+            <section class="tags">
+                <p class="tags__titulo">Busque por tags:</p>
+                <ul class="tags__lista">
+                    <li class="tags__tag">Nebulosa</li>
+                    <li class="tags__tag">Estrela</li>
+                    <li class="tags__tag">Galáxia</li>
+                    <li class="tags__tag">Planeta</li>
+                </ul>
+            </section>
+            <section class="galeria">
+                <div class="cards">
+                    <h2 class="cards__titulo">Navegue pela galeria</h2>
+                    <ul class="cards__lista">
+                        {% if photos %}
+                        {% for photo in photos %}
+                            <li class="card">
+                                <a href="{% url 'image' photo.id %}">
+                                    {% if photo.photoPath == '' or photo.photoPath == null %}
+                                        <img class="card__imagem" src="{% static '/assets/imagens/galeria/not-found.png'%}" alt="foto">
+                                    {% else %}
+                                        <img class="card__imagem" src="{{ photo.photoPath.url }}" alt="foto">
+                                    {% endif %}
+                                </a>
+                                <span class="card__tag">{{ photo.category }}</span>
+                                <div class="card__info">
+                                    <p class="card__titulo">{{ photo.name }}</p>
+                                    <div class="card__texto">
+                                        <p class="card__descricao">{{ photo.subtitle }}</p>
+                                        <span>
+                                            <img src="{% static '/assets/ícones/1x/favorite_outline.png' %}" alt="ícone de coração">
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                        {% else %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </section>
+        </section>
+    </main>
 {% endblock %}

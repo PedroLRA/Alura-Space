@@ -1,27 +1,25 @@
 {% extends 'galery/base.html' %}
 {% load static %}
 {% block content %}
-    <div class="pagina-inicial">
-        <main class="principal">
-            {% include 'galery/partials/_side_menu.html' %}
-            <section class="conteudo">
-                <section class="imagem">
-                    <div class="imagem__conteudo">
-                        {% if photo.photoPath == '' or photo.photoPath == null %}
-                            <img class="imagem__imagem" src="{% static '/assets/imagens/galeria/not-found.png'%}" alt="foto">
-                        {% else %}
-                            <img class="imagem__imagem" src="{{ photo.photoPath.url }}" alt="foto">
-                        {% endif %}
-                        <div class="imagem__info">
-                            <div class="imagem__texto">
-                                <p class="imagem__titulo">{{ photo.name }}</p>
-                                <p class="imagem__descricao">{{ photo.subtitle }}</p>
-                                <p class="imagem__texto">{{  photo.description }}</p>
-                            </div>
+    <main class="principal">
+        {% include 'galery/partials/_side_menu.html' %}
+        <section class="conteudo">
+            <section class="imagem">
+                <div class="imagem__conteudo">
+                    {% if photo.photoPath == '' or photo.photoPath == null %}
+                        <img class="imagem__imagem" src="{% static '/assets/imagens/galeria/not-found.png'%}" alt="foto">
+                    {% else %}
+                        <img class="imagem__imagem" src="{{ photo.photoPath.url }}" alt="foto">
+                    {% endif %}
+                    <div class="imagem__info">
+                        <div class="imagem__texto">
+                            <p class="imagem__titulo">{{ photo.name }}</p>
+                            <p class="imagem__descricao">{{ photo.subtitle }}</p>
+                            <p class="imagem__texto">{{  photo.description }}</p>
                         </div>
                     </div>
-                </section>
+                </div>
             </section>
-        </main>
-    </div>
+        </section>
+    </main>
 {% endblock %}
