@@ -3,11 +3,7 @@
     <img src="{% static '/assets/logo/Logo(2).png' %}" alt="Logo da Alura Space" />
 
     <!-- Messages dislpay -->
-    {% for message in messages %}
-        <div  class="alert alert-primary" role="alert">
-            <p id="messages">{{ message }}</p>
-        </div>
-    {% endfor %}
+    {% include 'partials/_alerts.html' %}
     {% if user.is_authenticated %}
         <div class="cabecalho__busca">
             <div class="busca__fundo">

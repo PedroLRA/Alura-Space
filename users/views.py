@@ -32,22 +32,11 @@ def register(request):
         form = RegisterForms(request.POST)
     
         if not form.is_valid(): # form info is invalid
-            messages.error(request, 'Error ao efetuar cadastro')
-            return redirect('register')
+            return render(request, 'users/register.html', {'form': form})
 
         username = form['username'].value()
         email = form['email'].value()
         password = form['password'].value()
-        passwordConfirm = form['passwordConfirm'].value()
-        
-        if password != passwordConfirm: # password confirmation check
-            messages.error(request, 'Senhas não são iguais')
-            return redirect('register')
-
-        #if user already exists
-        if User.objects.filter(username=username).exists(): 
-            messages.error(request, 'Usuário já existente')
-            return redirect('register')
         
         user = User.objects.create_user(
             username=username,

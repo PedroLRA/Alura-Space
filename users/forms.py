@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 
 class LoginForms(forms.Form):
     username = forms.CharField(
@@ -72,3 +73,25 @@ class RegisterForms(forms.Form):
             }
         )
     )
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+
+        if username:
+            username = username.strip()
+            if ' ' in username:
+                raise forms.ValidationError('"Username" não deve conter espaços.')
+            if User.objects.filter(username=username).exists():
+                raise forms.ValidationError('Usuário já existente')
+            else:
+                return username
+            
+    def clean_passwordConfirm(self):
+        password = self.cleaned_data.get('password')
+        passwordConfirm = self.cleaned_data.get('passwordConfirm')
+
+        if password and passwordConfirm:
+            if password != passwordConfirm: # password confirmation check
+                raise forms.ValidationError('As senhas não conferem')
+            else:
+                return passwordConfirm
