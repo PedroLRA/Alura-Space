@@ -61,3 +61,8 @@ def register(request):
     
     form = RegisterForms()
     return render(request, 'users/register.html', {'form': form})
+
+def logout(request):
+    auth.logout(request)
+    messages.success(request, 'Usuário desconectado com sucesso!')
+    return redirect('login')
