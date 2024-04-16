@@ -8,16 +8,18 @@
             <p id="messages">{{ message }}</p>
         </div>
     {% endfor %}
-    <div class="cabecalho__busca">
-        <div class="busca__fundo">
-            <form action="{% url 'index' %}">
-                <div class="busca__form">
-                    <input class="busca__input" type="text" name="search" placeholder="O que você procura?" />
-                    <button class="busca__botao" type="submit">
-                        <img class="busca__icone" src="{% static '/assets/ícones/1x/search.png' %}" alt="ícone de search">
-                    </button>
-                </div>
-            </form>
+    {% if user.is_authenticated %}
+        <div class="cabecalho__busca">
+            <div class="busca__fundo">
+                <form action="{% url 'index' %}">
+                    <div class="busca__form">
+                        <input class="busca__input" type="text" name="search" placeholder="O que você procura?" />
+                        <button class="busca__botao" type="submit">
+                            <img class="busca__icone" src="{% static '/assets/ícones/1x/search.png' %}" alt="ícone de search">
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
+    {% endif %}
 </header>
