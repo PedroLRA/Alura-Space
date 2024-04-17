@@ -14,11 +14,13 @@
 </head>
 
 <body>
-    <div class="pagina-inicial">
-        {% include 'partials/_header.html' %}
-        {% block content %}{% endblock %}
+    <div class="page-container">
+        <div class="pagina-inicial">
+            {% include 'partials/_header.html' %}
+            {% block content %}{% endblock %}
+        </div>
+        {% include 'partials/_footer.html' %}
     </div>
-    {% include 'partials/_footer.html' %}
 </body>
 
 </html>

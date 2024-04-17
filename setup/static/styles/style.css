@@ -3,7 +3,6 @@
    License: none (public domain)
 */
 
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -52,6 +51,11 @@ q:before, q:after {
 table {
     border-collapse: collapse;
     border-spacing: 0;
+}
+
+.page-container {
+    position: relative;
+    min-height: 100vh;
 }
 
 .banner {
@@ -348,9 +352,13 @@ table {
 .principal {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 4rem;
 }
 
 .rodape {
+    position: absolute;
+    bottom: 0;
+    height: 4rem;
     background-color: #04244F;
     width: 100%;
     padding: 1.5rem 3rem;
