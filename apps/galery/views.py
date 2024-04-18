@@ -45,7 +45,7 @@ def edit_image(request, photoId):
         messages.error(request, 'Usuário não conectado')
         return redirect('login')
     
-    photo = Photo.objects.get(id=photoId)
+    photo = get_object_or_404(Photo, id=photoId)
 
     if not request.user == photo.user:
         messages.error(request, 'Ação não permitida')
@@ -66,7 +66,7 @@ def delete_image(request, photoId):
         messages.error(request, 'Usuário não conectado')
         return redirect('login')
     
-    photo = Photo.objects.get(id=photoId)
+    photo = get_object_or_404(Photo, id=photoId)
 
     if not request.user == photo.user:
         messages.error(request, 'Ação não permitida')
