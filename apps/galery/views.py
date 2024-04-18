@@ -40,12 +40,22 @@ def new_image(request):
     form = PhotoForms()      
     return render(request, 'galery/new_image.html', {'form': form})
 
-def edit_image(request):
+def edit_image(request, photoId):
     if not request.user.is_authenticated:
         messages.error(request, 'Usuário não conectado')
         return redirect('login')
     
-    raise NotImplementedError
+    photo = Photo.objects.get(id=photoId)
+
+    if request.method == 'POST':
+        form = PhotoForms(request.POST, request.FILES, instance=photo, user=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Fotografia editada com sucesso')
+            return redirect('index')
+
+    form = PhotoForms(instance=photo, edit=True)
+    return render(request, 'galery/edit_image.html', {'form': form, 'photoId': photoId})
 
 def delete_image(request):
     if not request.user.is_authenticated:

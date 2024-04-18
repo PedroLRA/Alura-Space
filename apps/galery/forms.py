@@ -2,16 +2,26 @@ from django import forms
 from apps.galery.models import Photo
 
 class PhotoForms(forms.ModelForm):
-
-    # Overrideing __init__ to get request.user
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
+        self.edit = kwargs.pop('edit', False)
         super(PhotoForms, self).__init__(*args, **kwargs)
+
+        if self.edit:
+            self.fields['photoPath'].widget = forms.HiddenInput()
 
     class Meta:
         model = Photo
-        exclude = ['publish', 'user']
-    
+        
+        fields = [
+            'name',
+            'subtitle',
+            'description',
+            'category',
+            'date',
+            'photoPath'
+        ]
+
         labels = {
             'name': 'Nome',
             'subtitle': 'Legenda',
@@ -36,7 +46,6 @@ class PhotoForms(forms.ModelForm):
             ),
         }
 
-    # Overriding save method
     def save(self, commit=True):
         instance = super(PhotoForms, self).save(commit=False)
         instance.user = self.user

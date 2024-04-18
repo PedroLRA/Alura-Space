@@ -15,6 +15,13 @@
                         <p class="imagem__descricao">{{ photo.subtitle }}</p>
                         <p class="imagem__texto">{{  photo.description }}</p>
                     </div>
+                    {% if request.user == photo.user%}
+                    <div>
+                        <a href="{% url 'edit_image' photo.id %}">
+                            <button class="col-12 btn btn-success" style="padding: top 5px;" type="submit">Editar fotografia</button>
+                        </a>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </section>

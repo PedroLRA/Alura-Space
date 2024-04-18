@@ -6,6 +6,6 @@ urlpatterns = [
     path('', index, name = 'index'),
     path('image/<int:photoId>', image, name = 'image'),
     path('new-image', new_image, name = 'new_image'),
-    path('edit-image', edit_image, name = 'edit_image'),
+    path('edit-image/<int:photoId>', edit_image, name = 'edit_image'),
     path('delete-image', delete_image, name = 'delete_image'),
 ]
