@@ -47,6 +47,10 @@ def edit_image(request, photoId):
     
     photo = Photo.objects.get(id=photoId)
 
+    if not request.user == photo.user:
+        messages.error(request, 'Ação não permitida')
+        return redirect('index')
+
     if request.method == 'POST':
         form = PhotoForms(request.POST, request.FILES, instance=photo, user=request.user)
         if form.is_valid():
@@ -62,7 +66,13 @@ def delete_image(request, photoId):
         messages.error(request, 'Usuário não conectado')
         return redirect('login')
     
-    Photo.objects.get(id=photoId).delete()
+    photo = Photo.objects.get(id=photoId)
+
+    if not request.user == photo.user:
+        messages.error(request, 'Ação não permitida')
+        return redirect('index')
+    
+    photo.delete()
     messages.success(request, 'Fotografia deletada com sucesso')
     return redirect('index')
     
