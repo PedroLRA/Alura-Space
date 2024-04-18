@@ -57,9 +57,12 @@ def edit_image(request, photoId):
     form = PhotoForms(instance=photo, edit=True)
     return render(request, 'galery/edit_image.html', {'form': form, 'photoId': photoId})
 
-def delete_image(request):
+def delete_image(request, photoId):
     if not request.user.is_authenticated:
         messages.error(request, 'Usuário não conectado')
         return redirect('login')
     
-    raise NotImplementedError
+    Photo.objects.get(id=photoId).delete()
+    messages.success(request, 'Fotografia deletada com sucesso')
+    return redirect('index')
+    
