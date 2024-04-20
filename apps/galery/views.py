@@ -17,6 +17,15 @@ def index(request):
 
     return render(request, 'galery/index.html', {"photos": photos})
 
+def filter(request, category):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Usuário não conectado')
+        return redirect('login')
+
+    photos = Photo.objects.filter(publish=True, category=category).order_by("-date")
+    
+    return render(request, 'galery/index.html', {"photos": photos})
+
 def image(request, photoId):
     if not request.user.is_authenticated:
         messages.error(request, 'Usuário não conectado')
