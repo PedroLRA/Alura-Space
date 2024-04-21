@@ -1,9 +1,11 @@
+from django.views.decorators.http import require_http_methods
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from apps.galery.models import Photo
 from apps.galery.forms import PhotoForms
 
+@require_http_methods(['GET'])
 @login_required
 def index(request):
     photos = Photo.objects.filter(publish=True).order_by("-date")
@@ -15,17 +17,20 @@ def index(request):
 
     return render(request, 'galery/index.html', {"photos": photos})
 
+@require_http_methods(['GET'])
 @login_required
 def filter(request, category):
     photos = Photo.objects.filter(publish=True, category=category).order_by("-date")
     
     return render(request, 'galery/index.html', {"photos": photos})
 
+@require_http_methods(['GET'])
 @login_required
 def image(request, photoId):
     photo = get_object_or_404(Photo, pk=photoId)
     return render(request, 'galery/image.html', {"photo": photo})
 
+@require_http_methods(['GET', 'POST'])
 @login_required
 def new_image(request):
     if request.method == 'POST':
@@ -38,6 +43,7 @@ def new_image(request):
     form = PhotoForms()      
     return render(request, 'galery/new_image.html', {'form': form})
 
+@require_http_methods(['GET', 'POST'])
 @login_required
 def edit_image(request, photoId):
     photo = get_object_or_404(Photo, id=photoId)
@@ -56,6 +62,7 @@ def edit_image(request, photoId):
     form = PhotoForms(instance=photo, edit=True)
     return render(request, 'galery/edit_image.html', {'form': form, 'photoId': photoId})
 
+@require_http_methods(['GET'])
 @login_required
 def delete_image(request, photoId):
     photo = get_object_or_404(Photo, id=photoId)

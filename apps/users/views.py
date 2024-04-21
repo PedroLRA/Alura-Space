@@ -1,8 +1,10 @@
+from django.views.decorators.http import require_http_methods
 from django.shortcuts import render, redirect
 from django.contrib import auth, messages
 from django.contrib.auth.models import User
 from apps.users.forms import LoginForms, RegisterForms
 
+@require_http_methods(['GET', 'POST'])
 def login(request):
     if request.method == 'POST':
         form = LoginForms(request.POST)
@@ -29,6 +31,7 @@ def login(request):
         messages.error(request, 'Usuário precisa estar conectado')    
     return render(request, 'users/login.html', {'form': form})
 
+@require_http_methods(['GET', 'POST'])
 def register(request):
     if request.method == 'POST':
         form = RegisterForms(request.POST)
@@ -53,6 +56,7 @@ def register(request):
     form = RegisterForms()
     return render(request, 'users/register.html', {'form': form})
 
+@require_http_methods(['GET'])
 def logout(request):
     auth.logout(request)
     messages.success(request, 'Usuário desconectado com sucesso!')
