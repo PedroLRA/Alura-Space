@@ -10,7 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-from pathlib import Path, os
+import os
+from pathlib import Path
 from dotenv import load_dotenv
 
 # Loading environment variables
@@ -147,3 +148,7 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
     messages.SUCCESS: 'success',
 }
+
+# Login URL setup
+
+LOGIN_URL = 'login'

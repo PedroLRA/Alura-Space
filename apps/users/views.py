@@ -25,6 +25,8 @@ def login(request):
         return redirect('index')
 
     form = LoginForms()
+    if request.GET.get('next'): # Check if the user was redirected to login page
+        messages.error(request, 'Usuário precisa estar conectado')    
     return render(request, 'users/login.html', {'form': form})
 
 def register(request):
