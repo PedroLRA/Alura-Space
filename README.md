@@ -92,7 +92,7 @@ Now the project is already running in your localhost and you can access the app 
 ---
 
 <div style="text-align: right;">
-This project was developed for learning purposes.
-
-If you have any tips to improve the code I would ❤️ to hear.
+  This project was developed for learning purposes.
+  
+  If you have any tips to improve the code, feel free to submit them as issues. I would ❤️ to see it.
 </div>
