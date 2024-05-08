@@ -28,13 +28,13 @@ During the course and the development of the application, the following topics w
 To clone using `ssh`, you can use the following command:
 
 ```sh
-$ git clone git@github.com:PedroLRA/alura_space.git
+$ git clone git@github.com:PedroLRA/Alura-Space.git
 ```
 
 Or, if you prefer to use `HTTPS`:
 
 ```sh
-$ git clone https://github.com/PedroLRA/alura_space.git
+$ git clone https://github.com/PedroLRA/Alura-Space.git
 ```    
 
 ### 2. Change to the new directory where the project was cloned:
@@ -46,7 +46,7 @@ $ cd alura_space
 ### 3. Install project dependencies:
 
 ```sh
-$ pip install -r requirements/local.txt
+$ pip install -r requirements.txt
 ```
 
 ### 4. Configure the `.env` file.
@@ -66,13 +66,13 @@ To get the AWS configuration varibales you will need to create a new S3 bucket. 
 
 - [File storage with AWS S3 Buckets Upload — for the Django project | Medium](https://medium.com/@hrushi669/file-storage-with-aws-s3-buckets-upload-for-the-django-project-50ea7208c4b1)
 
-### 4. Then simply apply the migrations:
+### 5. Apply the migrations:
 
 ```sh
 $ python manage.py migrate
 ```    
 
-### 5. Collect the static files:
+### 6. Collect the static files:
 
 ```sh
 $ python manage.py collectstatic
@@ -80,7 +80,7 @@ $ python manage.py collectstatic
 
 This step might be a bit slow because the static files will be uploaded to the AWS bucket.
 
-### 6. Finally, run the development server:
+### 7. Finally, run the development server:
 
 ```sh
 $ python manage.py runserver
